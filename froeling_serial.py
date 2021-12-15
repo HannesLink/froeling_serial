@@ -60,9 +60,11 @@ class Froeling:
         if int(mysensor_id) == 1:
             mydesc = re.sub('[^a-zA-Z0-9äüöÄÜÖß ]', '', mydesc)
             mydesc = mydesc.lstrip()
-        # Replace blank spaces with underscore for checkmk for all Sensors except ID 1
-        if int(mysensor_id) != 1:
-            mydesc = mydesc.replace(" ", "_")
+        # Replace blank spaces with underscore for checkmk
+        mydesc = mydesc.replace(" ", "_")
+        # Replace blank spaces with underscore for checkmk for values from sensor 99
+        if int(mysensor_id) == 99:
+            myvalue = myvalue.replace(" ", "_")
         # Try to compute a total if we have numbers, otherwise simply use myvalue
         try:
             mytotal = round(float(int(myvalue) / int(myfactor)),2)
