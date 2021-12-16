@@ -32,7 +32,7 @@ class Froeling:
             # Split line into proper variables, skip the line if unpacking does not work
             try:
                 desc, value, sensor_id, factor, unit = decoded_bytes.split(';')
-            except ValueError as err:
+            except ValueError:
                 continue
 
             # Add sensor data to Fröling Class
@@ -96,7 +96,7 @@ class Froeling:
 
     def output_csv(self):
         """Generate a CSV file for storing sensor data"""
-        with open(self.filename,"w") as filehandle:
+        with open(self.filename,"w", encoding='utf-8') as filehandle:
             writer = csv.writer(filehandle,delimiter=",")
             for line in self.output_array():
                 writer.writerow([
@@ -111,16 +111,24 @@ class Froeling:
     def output_cmk(self):
         """Generate output for checkmk host agent"""
         cmkout = ['<<<froeling>>>',]
+        temps = ['<<<froeling_temps>>>',]
+        percent = ['<<<froeling_percent>>>',]
         for line in self.output_array():
-            cmkout.append(";".join([
-                    line['desc'],
-                    line['value'],
-                    line['sensor_id'],
-                    line['factor'],
-                    line['unit'],
-                    line['output']
-                ]))
-        return "\n".join(cmkout)
+            csvdata = ";".join([
+                line['desc'],
+                line['value'],
+                line['sensor_id'],
+                line['factor'],
+                line['unit'],
+                line['output']
+            ])
+            if line['unit'] == "°C":
+                temps.append(csvdata)
+            elif line['unit'] == "%":
+                percent.append(csvdata)
+            else:
+                cmkout.append(csvdata)
+        return "\n".join(cmkout + temps + percent)
 
     @property
     def counter(self):
