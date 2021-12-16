@@ -5,32 +5,44 @@ def discover_froeling_sensors(section):
         desc, value, sensor_id, factor, unit, total = line[0].split(';')
         if int(sensor_id) == 1:
             yield Service(item="Status")
-        yield Service(item=desc)
+        else:
+            yield Service(item=desc)
 
 def check_froeling_sensors(item, section):
     for line in section:
         desc, value, sensor_id, factor, unit, total = line[0].split(';')
+
+        # Try to compute a float mytotal for metrics
+        try:
+            mytotal = round(float(int(value) / int(factor)),2)
+        except ValueError:
+            mytotal = value
+
+        # Special Sensors
         if int(sensor_id) == 1 and item == "Status":
             yield Result(state=State.OK, summary=desc)
             return
+
+        if int(sensor_id) == 99:
+            if value == "Kein_Fehler":
+                yield Result(state=State.OK, summary=value)
+            else:
+                yield Result(state=State.CRIT, summary=value)
+            return
+
+        # Sensors with numeric data
         if desc == item:
             s = State.OK
+            yield Metric(
+                desc,
+                mytotal
+            )
             yield Result(
                 state = s,
                 summary = f"{total}"
             )
             return
-    yield Result(state=State.CRIT, summary="No status message found")
-
-def check_froeling_temps(item, section):
-   for line in section:
-        desc, value, sensor_id, factor, unit, total = line[0].split(';')
-        if desc == item:
-            s = State.OK
-            yield Result(
-                state = s,
-                summary = f"{total}"
-            )
+    yield Result(state=State.UNKNOWN, summary="No sensor data found")
 
 register.check_plugin(
     name="froeling",

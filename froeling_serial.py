@@ -62,6 +62,7 @@ class Froeling:
             mydesc = mydesc.lstrip()
         # Replace blank spaces with underscore for checkmk
         mydesc = mydesc.replace(" ", "_")
+        mydesc = mydesc.replace(":", "")
         # Replace blank spaces with underscore for checkmk for values from sensor 99
         if int(mysensor_id) == 99:
             myvalue = myvalue.replace(" ", "_")
