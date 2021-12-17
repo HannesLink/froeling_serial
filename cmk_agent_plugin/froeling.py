@@ -36,8 +36,8 @@ def check_froeling_sensors(item, section):
         if desc == item:
             s = State.OK
             yield Metric(
-                desc,
-                mytotal
+                name=desc,
+                value=mytotal,
             )
             yield Result(
                 state = s,
@@ -49,7 +49,6 @@ def check_froeling_sensors(item, section):
 def check_froeling_temp(item, params, section):
     for line in section:
         desc, value, sensor_id, factor, unit, total = line[0].split(';')
-
         # Try to compute a float mytotal for metrics
         try:
             mytotal = round(float(int(value) / int(factor)),2)
@@ -58,13 +57,13 @@ def check_froeling_temp(item, params, section):
 
         if desc == item:
             yield Metric(
-                desc,
-                mytotal
+                name=desc,
+                value=mytotal,
+                levels=params['levels']
             )
-            yield check_temperature(
-                mytotal,
-                params,
-                "Fröling %s" % item
+            yield Result(
+                state = State.OK,
+                summary = f"{total}"
             )
             return
     yield Result(state=State.UNKNOWN, summary="No sensor data found")
@@ -82,7 +81,9 @@ register.check_plugin(
     discovery_function=discover_froeling_sensors,
     check_function=check_froeling_temp,
     check_ruleset_name = "temperature",
-    check_default_parameters={},
+    check_default_parameters={
+        "levels": (90, 95)
+    },
 )
 
 register.check_plugin(
