@@ -55,6 +55,20 @@ def check_froeling_temp(item, params, section):
         except ValueError:
             mytotal = value
 
+        status, infotext, perfdata = check_temperature(
+            mytotal,
+            params,
+            "Fröling %s" % item)
+
+        if status == 0:
+            s = State.OK
+        elif status == 1:
+            s = State.WARN
+        elif status == 2:
+            s = State.CRIT
+        else:
+            s = State.UNKNOWN
+
         if desc == item:
             yield Metric(
                 name=desc,
@@ -62,7 +76,7 @@ def check_froeling_temp(item, params, section):
                 levels=params['levels']
             )
             yield Result(
-                state = State.OK,
+                state = s,
                 summary = f"{total}"
             )
             return
