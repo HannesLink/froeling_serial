@@ -175,3 +175,140 @@ perfometer_info.append({
     "half_value": 50.0,
     "exponent": 1.2,
 })
+
+#   __                _ _                                                _
+#  / _|_ __ ___   ___| (_)_ __   __ _      _ __   ___ _ __ ___ ___ _ __ | |_
+# | |_| '__/ _ \ / _ \ | | '_ \ / _` |    | '_ \ / _ \ '__/ __/ _ \ '_ \| __|
+# |  _| | | (_) |  __/ | | | | | (_| |    | |_) |  __/ | | (_|  __/ | | | |_
+# |_| |_|  \___/ \___|_|_|_| |_|\__, |____| .__/ \___|_|  \___\___|_| |_|\__|
+#                               |___/_____|_|
+
+metric_info["Kesselstrg"] = {
+    "title": _("Kesselsteuerung"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Kesselstrg"],
+    "total": 100.0,
+})
+
+metric_info["Primärluft"] = {
+    "title": _("Primärluft"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Primärluft"],
+    "total": 100.0,
+})
+
+metric_info["Rest_O2_ist"] = {
+    "title": _("Restsauerstoffgehalt"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Rest_O2_ist"],
+    "total": 100.0,
+})
+
+metric_info["O2_Regler"] = {
+    "title": _("O2 Regler"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["O2_Regler"],
+    "total": 100.0,
+})
+
+metric_info["Sekundärluft"] = {
+    "title": _("Sekundärluft"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Sekundärluft"],
+    "total": 100.0,
+})
+
+metric_info["Saugzug_Soll"] = {
+    "title": _("Saugzug_Soll"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Saugzug_Soll"],
+    "total": 100.0,
+})
+
+metric_info["Einschub_Ist"] = {
+    "title": _("Einschub_Ist"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Einschub_Ist"],
+    "total": 100.0,
+})
+
+metric_info["O2_Regler_Pell"] = {
+    "title": _("O2_Regler_Pell"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["O2_Regler_Pell"],
+    "total": 100.0,
+})
+
+metric_info["Füllstand"] = {
+    "title": _("Füllstand Tagesbehälter"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Füllstand"],
+    "total": 100.0,
+})
+
+metric_info["Pufferpumpe"] = {
+    "title": _("Pufferpumpe"),
+    "help": _("Prozent"),
+    "unit": "%",
+    "color": "26/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["Pufferpumpe"],
+    "total": 100.0,
+})
