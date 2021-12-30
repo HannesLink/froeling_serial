@@ -1,4 +1,91 @@
 from cmk.gui.plugins.metrics import perfometer_info, metric_info
+#   __                _ _
+#  / _|_ __ ___   ___| (_)_ __   __ _
+# | |_| '__/ _ \ / _ \ | | '_ \ / _` |
+# |  _| | | (_) |  __/ | | | | | (_| |
+# |_| |_|  \___/ \___|_|_|_| |_|\__, |
+#                               |___/
+metric_info["Saugzug_Ist"] = {
+    "title": _("Saugzug_Ist"),
+    "help": _("UPM"),
+    "unit": "rpm",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "logarithmic",
+    "metric": "Saugzug_Ist",
+    "half_value": 1000,
+    "exponent": 10,
+})
+
+metric_info["Ansauggeschw."] = {
+    "title": _("Ansauggeschwindigkeit"),
+    "help": _("m/s"),
+    "unit": "1/s",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "logarithmic",
+    "metric": "Ansauggeschw.",
+    "half_value": 2.0,
+    "exponent": 0.2,
+})
+
+metric_info["Strom_Austrags"] = {
+    "title": _("Stromaufnahme Austragschnecke"),
+    "help": _("Ampere"),
+    "unit": "a",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "logarithmic",
+    "metric": "Strom_Austrags",
+    "half_value": 1,
+    "exponent": 0.5,
+})
+
+metric_info["HK_Pumpe_1"] = {
+    "title": _("Keizkreis 1 Pumpe"),
+    "help": _("Prozent"),
+    "unit": "count",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["HK_Pumpe_1"],
+    "total": 1,
+})
+
+metric_info["HK_Pumpe_2"] = {
+    "title": _("Keizkreis 2 Pumpe"),
+    "help": _("Prozent"),
+    "unit": "count",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "linear",
+    "segments": ["HK_Pumpe_2"],
+    "total": 1,
+})
+
+metric_info["Betriebsstunden"] = {
+    "title": _("Betriebsstunden"),
+    "help": _("Hours"),
+    "unit": "count",
+    "color": "35/a",
+}
+
+perfometer_info.append({
+    "type": "logarithmic",
+    "metric": "Betriebsstunden",
+    "half_value": 10000,
+    "exponent": 2,
+})
 
 #   __                _ _              _
 #  / _|_ __ ___   ___| (_)_ __   __ _ | |_ ___ _ __ ___  _ __  ___
